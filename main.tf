@@ -27,4 +27,20 @@ resource "helm_release" "bde" {
   name      = "cache"
   repoitory = data.helm_repository.public.metadata[0].name
   chart     = var.helm_chart
+
+  timeout = var.timeout
+
+  // a namespace this chart will install to
+  namespace = var.namespace
+
+  // load custom
+  values = var.values
+
+  // reuse previous values or
+  // reset to build time values
+  reuse_values = var.reuse_values
+  reset_values = var.reset_values
+
+  cleanup_on_fail = var.cleanup_on_fail
+  automic = var.automic
 }
