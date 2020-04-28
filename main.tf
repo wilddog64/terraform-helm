@@ -3,30 +3,27 @@
 data "google_client_config" "current" {}
 
 // configure helm povider
-provider "helm" {
-  version = "~> 1.1"
-  kubernetes {
+//
 
-    load_config_file = false
+provider "kubernetes" {
+  version = "~> 1.11"
+  load_config_file = false
+  host = var.gke_host_endpoint
 
-    host = var.gke_host_endpoint
-
-    cluster_ca_certificate = base64decode(
-      // google_container_cluster.vault.master_auth[0].cluster_ca_certificate,
-      var.cluster_ca_certificate
-    )
-    token = data.google_client_config.current.access_token
-  }
+  cluster_ca_certificate = base64decode(
+    // google_container_cluster.vault.master_auth[0].cluster_ca_certificate,
+    var.cluster_ca_certificate
+  )
+  token = data.google_client_config.current.access_token
 }
 
-data "helm_repository" "repo" {
-  name = "pulbic"
-  url = "https://hub.helm.sh"
+provider "helm" {
+  version = "~> 1.1.1"
 }
 
 resource "helm_release" "bde" {
   name       = "cache"
-  repository = data.helm_repository.repo.metadata[0].name
+  repository = "https://hub.helm.sh"
   chart      = var.helm_chart
 
   timeout = var.timeout
