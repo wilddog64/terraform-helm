@@ -4,7 +4,8 @@ data "google_client_config" "current" {}
 
 // configure helm povider
 provider "helm" {
-  kubernests {
+  version = "~> 1.1"
+  kubernetes {
 
     load_config_file = false
 
@@ -18,7 +19,7 @@ provider "helm" {
   }
 }
 
-data "helm_repository" {
+data "helm_repository" "repo" {
   name = "pulbic"
   url = "https://hub.helm.sh"
 }
@@ -43,4 +44,3 @@ resource "helm_release" "bde" {
 
   cleanup_on_fail = var.cleanup_on_fail
   automic = var.automic
-}
