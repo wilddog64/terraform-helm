@@ -10,8 +10,8 @@ data "terraform_remote_state" "bde-project" {
 module "jenkins" {
   source = "../.."
   credential_file = file("~/.config/gcloud/tf-svc-acct.json")
-  region = data.terraform_remote_state.bde-project.region
-  zone = data.terraform_remote_state.bde-project.zone
+  region = data.terraform_remote_state.bde-project.outputs.region
+  zone = data.terraform_remote_state.bde-project.outputs.zone
   gke_host_endpoint = data.terraform_remote_state.service-host.gke_cluster_endpoint
   gke_cluster_ca_certificate = data.terraform_remote_state.service-host.gke_cluster_ca_cert
 
