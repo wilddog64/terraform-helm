@@ -1,0 +1,7 @@
+.terraform/
+terraform.*
+tf-state/
+tmp/
+*.tfstate
+services-host.json
+billing_account.txt
