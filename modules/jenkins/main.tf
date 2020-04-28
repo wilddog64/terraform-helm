@@ -26,7 +26,9 @@ module "jenkins" {
   gke_host_endpoint = data.terraform_remote_state.bde-gke.outputs.cluster_endpoint
   cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluster_ca_certificate
 
-  namespace = "stable/jenkins"
+  helm_chart = "stable/jenkins"
+
+  namespace = "jenkins"
   values = [
     "${file("${path.module}/files/values.yaml")}"
   ]
