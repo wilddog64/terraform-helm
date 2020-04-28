@@ -1,5 +1,6 @@
 data "terraform_remote_state" "bde-project" {
   backend = "gcs"
+  workspace = "services-host-dev"
   config = {
     bucket      = "bde-tf-state-dev"
     prefix      = "terraform/state"
@@ -9,6 +10,7 @@ data "terraform_remote_state" "bde-project" {
 
 data "terraform_remote_state" "bde-gke" {
   backend = "gcs"
+  workspace = "services-host-dev"
   config = {
     bucket      = "bde-tf-state-dev"
     prefix      = "terraform/state"
@@ -22,7 +24,7 @@ module "jenkins" {
   region = data.terraform_remote_state.bde-project.outputs.region
   zone = data.terraform_remote_state.bde-project.outputs.zone
   gke_host_endpoint = data.terraform_remote_state.bde-gke.outputs.cluster_endpoint
-  gke_cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluser_ca_certificate
+  cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluster_ca_certificate
 
   namespace = "stable/jenkins"
   values = [
