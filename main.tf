@@ -26,7 +26,7 @@ data "helm_repository" "repo" {
 
 resource "helm_release" "bde" {
   name       = "cache"
-  repository = data.helm_repository.public.metadata[0].name
+  repository = data.helm_repository.repo.metadata[0].name
   chart      = var.helm_chart
 
   timeout = var.timeout
