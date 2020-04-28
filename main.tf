@@ -13,7 +13,7 @@ provider "helm" {
 
     cluster_ca_certificate = base64decode(
       // google_container_cluster.vault.master_auth[0].cluster_ca_certificate,
-      var.cluster_ca_certifiate
+      var.cluster_ca_certificate
     )
     token = data.google_client_config.current.access_token
   }
@@ -43,7 +43,7 @@ resource "helm_release" "bde" {
   reset_values = var.reset_values
 
   cleanup_on_fail = var.cleanup_on_fail
-  automic = var.automic
+  atomic = var.atomic
 
   // generate a set block if var.sets is not null
   dynamic "set" {

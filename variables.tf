@@ -103,8 +103,14 @@ variable "set_string" {
   default = null
 }
 
-variable "cluster_ca_certifiate" {
+variable "cluster_ca_certificate" {
   description = "a k8s cluster ca cert"
   type = string
   default = null
+}
+
+variable "atomic" {
+  description = "perform a helm atomic operation"
+  type = bool
+  default = false
 }
