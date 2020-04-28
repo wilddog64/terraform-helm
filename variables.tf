@@ -102,3 +102,9 @@ variable "set_string" {
   }))
   default = null
 }
+
+variable "cluster_ca_certifiate" {
+  description = "a k8s cluster ca cert"
+  type = string
+  default = null
+}
