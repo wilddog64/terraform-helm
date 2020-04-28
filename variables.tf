@@ -1,3 +1,21 @@
+variable "credential_file" {
+  description = "an service account credential file"
+  type        = string
+  default     = null
+}
+
+variable "region" {
+  description = "region of the project"
+  type        = string
+  default     = "us-west1"
+}
+
+variable "zone" {
+  description = "a valid zone for a given region"
+  type        = string
+  default     = "us-west1-a"
+}
+
 variable "gke_host_endpoint" {
   description = "The hostname (in form of URI) of Kubernetes master"
   type        = string
