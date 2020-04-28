@@ -18,3 +18,13 @@ provider "helm" {
   }
 }
 
+data "helm_repository" {
+  name = "pulbic"
+  url = "https://hub.helm.sh"
+}
+
+resource "helm_release" "bde" {
+  name      = "cache"
+  repoitory = data.helm_repository.public.metadata[0].name
+  chart     = var.helm_chart
+}

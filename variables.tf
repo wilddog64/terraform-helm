@@ -9,3 +9,9 @@ variable "gke_cluster_ca_certificate" {
   type = string
   default = null
 }
+
+variable "helm_chart" {
+  description = "a helm chart this module try to install"
+  type        = string
+  default     = null
+}
