@@ -44,3 +44,34 @@ resource "helm_release" "bde" {
 
   cleanup_on_fail = var.cleanup_on_fail
   automic = var.automic
+
+  // generate a set block if var.sets is not null
+  dynamic "set" {
+    for_each = var.set == null ? [] : var.set
+
+    content {
+      name  = each.value.name
+      value = each.value.value
+    }
+  }
+
+  // generate a set_sensitive dynamiclly if var.set_sensitive is not null
+  dynamic "set_sensitive" {
+    for_each = var.set_sensitive == null ? [] : var.set_sensitive
+
+    content {
+      name  = each.value.name
+      value = each.value.value
+    }
+  }
+
+  // generate a set_string dynamiclly if var.set_string is not null
+  dynamic  "set_string" {
+    for_each = var.set_string == null ? [] : var.set_string
+
+    content {
+      name  = each.value.name
+      value = each.value.value
+    }
+  }
+}
