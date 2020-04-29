@@ -31,7 +31,7 @@ variable "gke_cluster_ca_certificate" {
 variable "helm_chart" {
   description = "a helm chart this module try to install"
   type        = string
-  default     = "cloudbee-core"
+  default     = "cloudbees-core"
 }
 
 variable "namespace" {
