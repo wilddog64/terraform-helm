@@ -114,3 +114,15 @@ variable "atomic" {
   type = bool
   default = false
 }
+
+variable "jenkins_version" {
+  description = "Specify the exact chart version to install. If this is not specified, the latest version is installed"
+  type        = string
+  default     = null
+}
+
+variable "helm_repo_url" {
+  description = "helm repository url"
+  type        = string
+  default     = null
+}

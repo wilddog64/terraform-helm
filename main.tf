@@ -21,9 +21,14 @@ provider "helm" {
   version = "~> 1.1.1"
 }
 
-resource "helm_release" "bde" {
-  name       = "cache"
-  repository = "https://charts.cloudbees.com/public/cloudbees"
+data "helm_repository" "stable" {
+  name = "stable"
+  url  = var.helm_repo_url
+}
+
+resource "helm_release" "jenkins" {
+  name       = var.release_name
+  repository = data.helm_repository.stable.metadata[0].name
   chart      = var.helm_chart
 
   timeout = var.timeout
@@ -34,6 +39,7 @@ resource "helm_release" "bde" {
   // load custom
   values = var.values
 
+  version = var.jenkins_version
   // reuse previous values or
   // reset to build time values
   reuse_values = var.reuse_values
