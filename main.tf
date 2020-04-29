@@ -26,6 +26,13 @@ data "helm_repository" "stable" {
   url  = var.helm_repo_url
 }
 
+// create a k8s namespace
+resource "kubernetes_namespace" "default" {
+  metadata {
+    name = var.namespace
+  }
+}
+
 resource "helm_release" "jenkins" {
   name       = var.release_name
   repository = data.helm_repository.stable.metadata[0].name
@@ -77,4 +84,8 @@ resource "helm_release" "jenkins" {
       value = each.value.value
     }
   }
+
+  depends_on = [
+    kubernetes_namespace.default
+  ]
 }
