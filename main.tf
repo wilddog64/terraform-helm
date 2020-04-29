@@ -23,7 +23,7 @@ provider "helm" {
 
 resource "helm_release" "bde" {
   name       = "cache"
-  repository = "https://hub.helm.sh"
+  repository = "https://charts.cloudbees.com/public/cloudbees"
   chart      = var.helm_chart
 
   timeout = var.timeout
