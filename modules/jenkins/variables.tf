@@ -31,13 +31,13 @@ variable "gke_cluster_ca_certificate" {
 variable "helm_chart" {
   description = "a helm chart this module try to install"
   type        = string
-  default     = null
+  default     = "cloudbee-core"
 }
 
 variable "namespace" {
   description = "a kubernetes namespace this chart will install to"
   type        = string
-  default     = null
+  default     = "bde-jenkins"
 }
 
 variable "values" {
@@ -49,7 +49,7 @@ variable "values" {
 variable "timeout" {
   description = "timeout value for chart installation, default 500s"
   type = number
-  default = 300
+  default = 60
 }
 
 variable "reuse_values" {
@@ -80,7 +80,7 @@ variable "set" {
   description = "Value block with custom values to be merged with the values yaml"
   type = list(object({
     name = string
-    value = any
+    value = string
   }))
   default = null
 }
@@ -106,5 +106,5 @@ variable "set_string" {
 variable "jenkins_version" {
   description = "Specify the exact chart version to install. If this is not specified, the latest version is installed"
   type        = string
-  default     = "2.204.1.3"
+  default     = "3.13.0+899a413a0e8f"
 }

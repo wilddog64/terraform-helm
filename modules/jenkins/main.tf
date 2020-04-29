@@ -27,19 +27,13 @@ module "jenkins" {
   cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluster_ca_certificate
   helm_repo_url = "https://charts.cloudbees.com/public/cloudbees"
 
-  helm_chart      = "cloudbees/cloudbees-jenkins-distribution"
+  helm_chart      = var.helm_chart
   jenkins_version = var.jenkins_version
+  timeout         = var.timeout
 
   release_name = "bde"
-  namespace = "cd-jenkins"
+  namespace = var.namespace
   values = [
     "${file("${path.module}/files/values.yaml")}"
-  ]
-
-  set_values = [
-    {
-      name = "nginx-ingress.enabled",
-      value = false
-    }
   ]
 }
