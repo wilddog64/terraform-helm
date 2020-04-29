@@ -76,7 +76,7 @@ variable "automic" {
   default     = false
 }
 
-variable "set" {
+variable "set_values" {
   description = "Value block with custom values to be merged with the values yaml"
   type = list(object({
     name = string

@@ -22,7 +22,7 @@ provider "helm" {
 }
 
 data "helm_repository" "stable" {
-  name = "stable"
+  name = "cloudbees"
   url  = var.helm_repo_url
 }
 
@@ -57,11 +57,11 @@ resource "helm_release" "jenkins" {
 
   // generate a set block if var.sets is not null
   dynamic "set" {
-    for_each = var.set == null ? [] : var.set
+    for_each = var.set_values == null ? [] : var.set_values
 
     content {
-      name  = each.value.name
-      value = each.value.value
+      name  = set.value.name
+      value = set.value.value
     }
   }
 
@@ -70,8 +70,8 @@ resource "helm_release" "jenkins" {
     for_each = var.set_sensitive == null ? [] : var.set_sensitive
 
     content {
-      name  = each.value.name
-      value = each.value.value
+      name  = set_sensitive.value.name
+      value = set_sensitive.value.value
     }
   }
 
@@ -80,8 +80,8 @@ resource "helm_release" "jenkins" {
     for_each = var.set_string == null ? [] : var.set_string
 
     content {
-      name  = each.value.name
-      value = each.value.value
+      name  = set_string.value.name
+      value = set_string.value.value
     }
   }
 
