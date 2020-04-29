@@ -29,10 +29,10 @@ module "jenkins" {
 
   helm_chart      = var.helm_chart
   jenkins_version = var.jenkins_version
-  timeout         = var.timeout
+  timeout         = 60
 
   release_name = "bde"
-  namespace = var.namespace
+  namespace = "bde-jenkins"
   values = [
     "${file("${path.module}/files/values.yaml")}"
   ]
