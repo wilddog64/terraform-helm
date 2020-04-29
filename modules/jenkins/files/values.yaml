@@ -1,4 +1,6 @@
 master:
+  runAsUser: 1000
+  fsGroup: 1000
   installPlugins:
     - kubernetes:latest
     - workflow-job:latest
