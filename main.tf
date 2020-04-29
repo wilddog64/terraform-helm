@@ -21,11 +21,6 @@ provider "helm" {
   version = "~> 1.1.1"
 }
 
-data "helm_repository" "stable" {
-  name = "cloudbees"
-  url  = var.helm_repo_url
-}
-
 // create a k8s namespace
 resource "kubernetes_namespace" "default" {
   metadata {
@@ -35,7 +30,7 @@ resource "kubernetes_namespace" "default" {
 
 resource "helm_release" "jenkins" {
   name       = var.release_name
-  repository = data.helm_repository.stable.metadata[0].name
+  repository = var.helm_repo_url
   chart      = var.helm_chart
 
   timeout = var.timeout
