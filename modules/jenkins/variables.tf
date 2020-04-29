@@ -102,3 +102,9 @@ variable "set_string" {
   }))
   default = null
 }
+
+variable "jenkins_version" {
+  description = "Specify the exact chart version to install. If this is not specified, the latest version is installed"
+  type        = string
+  default     = "2.204.1.3"
+}
