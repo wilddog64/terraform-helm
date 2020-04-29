@@ -126,3 +126,9 @@ variable "helm_repo_url" {
   type        = string
   default     = null
 }
+
+variable "release_name" {
+  description = "helm 3 release name"
+  type        = string
+  default     = null
+}
