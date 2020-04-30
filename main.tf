@@ -33,7 +33,7 @@ resource "kubernetes_namespace" "default" {
   }
 }
 
-resource "helm_release" "jenkins" {
+resource "helm_release" "default" {
   name       = var.release_name
   repository = data.helm_repository.default.metadata[0].name
   chart      = var.helm_chart
