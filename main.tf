@@ -22,7 +22,7 @@ provider "helm" {
 }
 
 data "helm_repository" "default" {
-  name = "cloudbees"
+  name = var.helm_repo
   url  = var.helm_repo_url
 }
 

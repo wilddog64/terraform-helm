@@ -132,3 +132,9 @@ variable "release_name" {
   type        = string
   default     = null
 }
+
+variable "helm_repo" {
+  description = "a repo for looking chart to install"
+  type        = string
+  default     = null
+}
