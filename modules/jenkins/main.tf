@@ -26,6 +26,7 @@ module "jenkins" {
   gke_host_endpoint = data.terraform_remote_state.bde-gke.outputs.cluster_endpoint
   cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluster_ca_certificate
   helm_repo_url = "https://charts.cloudbees.com/public/cloudbees"
+  helm_repo = "cloudbees"
 
   helm_chart      = var.helm_chart
   jenkins_version = var.jenkins_version
