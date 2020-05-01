@@ -19,12 +19,12 @@ master:
     limits:
       cpu: "1"
       memory: "3500Mi"
-  javaOpts: "-Xms3500m -Xmx3500m"
+  javaOpts: "-Xms3500m -Xmx3500m -Djenkins.install.runSetupWizard=false"
   serviceType: ClusterIP
 agent:
   resources:
     requests:
-      cpu: "500m"
+      cpu: "0.5m"
       memory: "256Mi"
     limits:
       cpu: "1"

@@ -138,3 +138,9 @@ variable "helm_repo" {
   type        = string
   default     = null
 }
+
+variable "kube_config_context" {
+  description = "kubectl config context"
+  type = string
+  default = null
+}
