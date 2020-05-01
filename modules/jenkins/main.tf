@@ -1,6 +1,6 @@
 data "terraform_remote_state" "bde-project" {
   backend = "gcs"
-  workspace = "services-host-dev"
+  workspace = var.workspace
   config = {
     bucket      = "bde-tf-state-dev"
     prefix      = "terraform/state"

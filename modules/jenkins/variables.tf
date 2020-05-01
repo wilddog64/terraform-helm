@@ -108,3 +108,9 @@ variable "jenkins_version" {
   type        = string
   default     = "3.13.0+899a413a0e8f"
 }
+
+variable "workspace" {
+  description = "a terraform workspace name"
+  type = string
+  default = "services-host-dev"
+}
