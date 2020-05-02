@@ -42,9 +42,3 @@ automic|type|bool|false|f set, installation process purges chart on fail. The wa
 jenkins_version|string|3.13.0+899a413a0e8f|Specify the exact chart version to install. If this is not specified, the latest version is installed|
 workspace|string|services-host-dev|a terraform workspace name that host the target environment|
 kube_config_context|string|null|a kubectl context to set|
-
-
-## Submodules
-A list of submodules developed based on this main one,
-
-[jenkins](./modules/jenkins/README.md)
