@@ -49,7 +49,7 @@ variable "values" {
 variable "timeout" {
   description = "timeout value for chart installation, default 500s"
   type = number
-  default = 60
+  default = 300
 }
 
 variable "reuse_values" {

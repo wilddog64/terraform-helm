@@ -45,7 +45,7 @@ module "jenkins" {
 
   helm_chart      = var.helm_chart
   jenkins_version = var.jenkins_version
-  timeout         = 60
+  timeout         = var.timeout
 
   release_name = "bde"
   namespace = "bde-jenkins"
