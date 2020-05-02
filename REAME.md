@@ -44,3 +44,12 @@ Generally speaking, it is often a good idea to provide a custom value to overrid
 
 |name|type|default|description|
 |----|----|-------|-----------|
+|credential_file|string|null|an service account credential file
+|region|string|string|us-west1|region of the project|
+|zone|string|us-west1-a|a valid zone for a given region|
+|gke_host_endpoint|string|null|The hostname (in form of URI) of Kubernetes master|
+|gke_cluster_ca_certificate|null|null|PEM-encoded root certificates bundle for TLS authentication. Can be sourced from|
+|helm_chart|string|null|a helm chart this module try to install|
+|namespace|string|null|a kubernetes namespace this chart will install to|
+|values|list|null|a list of custom chart value.yaml files|
+|timeout|number|300|timeout value for chart installation, default 500s|
