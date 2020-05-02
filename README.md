@@ -57,4 +57,4 @@ Generally speaking, it is often a good idea to provide a custom value to overrid
 ## Submodules
 A list of submodules developed based on this main one,
 
-[jenkins](./modules/jenkins/README.md)
+* [jenkins](./modules/jenkins/README.md)
