@@ -24,7 +24,7 @@ master:
 agent:
   resources:
     requests:
-      cpu: "0.5m"
+      cpu: "500m"
       memory: "256Mi"
     limits:
       cpu: "1"
@@ -33,3 +33,5 @@ persistence:
   size: 100Gi
 serviceAccount:
   name: cd-jenkins
+nginx-ingress:
+  enabled: true
