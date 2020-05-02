@@ -12,7 +12,6 @@ provider "kubernetes" {
 
   config_context = var.kube_config_context
   cluster_ca_certificate = base64decode(
-    // google_container_cluster.vault.master_auth[0].cluster_ca_certificate,
     var.cluster_ca_certificate
   )
   token = data.google_client_config.current.access_token
