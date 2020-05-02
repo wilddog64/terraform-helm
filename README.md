@@ -1,4 +1,4 @@
-# terraform-gcp-helm
+# terraform-helm
 
 This module a base module for developing any terraform module that will interface with [helm 3](https://helm.sh/blog/helm-3-released/) via [terraform helm provider](https://www.terraform.io/docs/providers/helm/index.html). As `helm` was designed to interact with `Kubernetes cluster`, these requirements have to be met
 
