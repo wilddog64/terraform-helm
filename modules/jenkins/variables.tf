@@ -114,3 +114,9 @@ variable "workspace" {
   type = string
   default = "services-host-dev"
 }
+
+variable "kube_config_context" {
+  description = "a kubectl context to set"
+  type = string
+  default = null
+}

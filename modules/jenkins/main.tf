@@ -1,5 +1,6 @@
 data "terraform_remote_state" "bde-project" {
   backend = "gcs"
+  // services-host-dev
   workspace = var.workspace
   config = {
     bucket      = "bde-tf-state-dev"
@@ -10,7 +11,7 @@ data "terraform_remote_state" "bde-project" {
 
 data "terraform_remote_state" "bde-gke" {
   backend = "gcs"
-  workspace = "services-host-dev"
+  workspace = var.workspace
   config = {
     bucket      = "bde-tf-state-dev"
     prefix      = "terraform/state"
@@ -24,6 +25,8 @@ module "jenkins" {
   region = data.terraform_remote_state.bde-project.outputs.region
   zone = data.terraform_remote_state.bde-project.outputs.zone
   gke_host_endpoint = data.terraform_remote_state.bde-gke.outputs.cluster_endpoint
+
+  kube_config_context = var.kube_config_context
   cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluster_ca_certificate
   helm_repo_url = "https://charts.cloudbees.com/public/cloudbees"
   helm_repo = "cloudbees"
