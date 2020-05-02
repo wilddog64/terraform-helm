@@ -6,3 +6,4 @@ tmp/
 services-host.json
 billing_account.txt
 crash.log
+*.json
