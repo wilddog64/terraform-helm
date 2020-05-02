@@ -19,6 +19,18 @@ data "terraform_remote_state" "bde-gke" {
   }
 }
 
+resource "random_id" "id" {
+  byte_length = 4
+  prefix      = "jenkins-static-ip-"
+}
+
+// provision a static ip here
+resource "google_compute_address" "static" {
+  project = data.terraform_remote_state.bde-project.outputs.project_id[0]
+  region  = data.terraform_remote_state.bde-project.outputs.region
+  name    = random_id.id.hex
+}
+
 module "jenkins" {
   source = "../.."
   credential_file = file("~/.config/gcloud/tf-svc-acct.json")
