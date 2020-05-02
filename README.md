@@ -53,3 +53,8 @@ Generally speaking, it is often a good idea to provide a custom value to overrid
 |namespace|string|null|a kubernetes namespace this chart will install to|
 |values|list|null|a list of custom chart value.yaml files|
 |timeout|number|300|timeout value for chart installation, default 500s|
+
+## Submodules
+A list of submodules developed based on this main one,
+
+[jenkins](./modules/jenkins/README.md)
