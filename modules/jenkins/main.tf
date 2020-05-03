@@ -19,6 +19,13 @@ data "terraform_remote_state" "bde-gke" {
   }
 }
 
+data "template_file" "custom_helm_values" {
+  template = "${file("${path.module}/files/values.yaml")}"
+  vars = {
+    jenkins_hostname = "${var.jenkins_hostname}"
+  }
+}
+
 resource "random_id" "id" {
   byte_length = 4
   prefix      = "jenkins-static-ip-"
@@ -50,6 +57,10 @@ module "jenkins" {
   release_name = "bde"
   namespace = "bde-jenkins"
   values = [
-    "${file("${path.module}/files/values.yaml")}"
+    "${data.template_file.custom_helm_values.rendered}"
+  ]
+
+  depends_on = [
+    google_compute_address.static
   ]
 }

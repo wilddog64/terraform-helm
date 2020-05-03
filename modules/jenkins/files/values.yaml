@@ -33,3 +33,9 @@ persistence:
   size: 100Gi
 serviceAccount:
   name: cd-jenkins
+
+nginx-ingress:
+    Enabled: false
+
+OperationsCenter:
+    HostName: ${jenkins_hostname}
