@@ -19,6 +19,17 @@ data "terraform_remote_state" "bde-gke" {
   }
 }
 
+
+data "terraform_remote_state" "bde-dns" {
+  backend = "gcs"
+  workspace = var.workspace
+  config = {
+    bucket      = "bde-tf-state-dev"
+    prefix      = "terraform/state"
+    credentials = file("~/.config/gcloud/tf-svc-acct.json")
+  }
+}
+
 data "template_file" "custom_helm_values" {
   template = "${file("${path.module}/files/values.yaml")}"
   vars = {
@@ -60,7 +71,7 @@ module "jenkins" {
     "${data.template_file.custom_helm_values.rendered}"
   ]
 
-  depends_on = [
+  depends = [
     google_compute_address.static
   ]
 }

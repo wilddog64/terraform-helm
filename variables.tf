@@ -144,3 +144,9 @@ variable "kube_config_context" {
   type = string
   default = null
 }
+
+variable "depends" {
+  description = "resources this module depends on"
+  type        = any
+  default     = null
+}
