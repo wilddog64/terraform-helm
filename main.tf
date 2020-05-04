@@ -86,7 +86,7 @@ resource "helm_release" "default" {
   }
 
   depends_on = [
-    kubernetes_namespace.default
+    kubernetes_namespace.default,
     var.depends
   ]
 }
