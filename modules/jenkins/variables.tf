@@ -120,3 +120,9 @@ variable "kube_config_context" {
   type = string
   default = null
 }
+
+variable "ip_address" {
+  description = "an ip address to create"
+  type        = string
+  default     = "10.0.42.42"
+}

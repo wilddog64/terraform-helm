@@ -29,6 +29,17 @@ data "terraform_remote_state" "bde-dns" {
   }
 }
 
+
+data "terraform_remote_state" "bde-vpc" {
+  backend = "gcs"
+  workspace = var.workspace
+  config = {
+    bucket      = "bde-tf-state-dev"
+    prefix      = "terraform/state"
+    credentials = file("~/.config/gcloud/tf-svc-acct.json")
+  }
+}
+
 data "template_file" "custom_helm_values" {
   template = "${file("${path.module}/files/values.yaml")}"
   vars = {
@@ -46,6 +57,20 @@ resource "google_compute_address" "static" {
   project = data.terraform_remote_state.bde-project.outputs.project_id[0]
   region  = data.terraform_remote_state.bde-project.outputs.region
   name    = random_id.id.hex
+
+  subnetwork = data.bde-vpc.vpc_private_subnet_self_link
+  address = var.ip_address
+}
+
+resource "google_dns_record_set" "jenkins" {
+  name = "jenkins.${data.bde-dns.dns_name}"
+  type = "A"
+  ttl  = 300
+
+  managed_zone = data.terraform_remote_state.bde-dns.managed_zone_name
+  rrdatas = [
+    google_compute_adddress.static.address
+  ]
 }
 
 module "jenkins" {
