@@ -19,7 +19,6 @@ data "terraform_remote_state" "bde-gke" {
   }
 }
 
-
 data "terraform_remote_state" "bde-dns" {
   backend = "gcs"
   workspace = var.workspace
