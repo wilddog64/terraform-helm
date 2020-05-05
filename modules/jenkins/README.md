@@ -14,7 +14,7 @@ _note_: in order to access output values from other projects, they have to be de
 
 ## Usage
 
-### To deploy Jenkins to project in terraform `sandbox workspace
+### To deploy Jenkins to project in terraform sandbox workspace
 
     # first generate a terraform plan
     terraform -var workspace=services-host-dev -var kube_config_context=gke_services-host-dev-5babb4e8_us-west2_bde -var ip_address=10.0.16.32 -var skip_crds=true -var timeout=500 -out /tmp/k8s-jenkins.plan
