@@ -39,6 +39,6 @@ reuse_values|bool|false|When upgrading, reuse the last release's values and merg
 reset_values|bool|false|When upgrading, reset the values to the ones built into the chart. Defaults to false|
 cleanup_on_fail|bool|false|Allow deletion of new resources created in this upgrade when upgrade fails. Defaults to false|
 automic|type|bool|false|f set, installation process purges chart on fail. The wait flag will be set automatically if atomic is used. Defaults to false|
-jenkins_version|string|3.13.0+899a413a0e8f|Specify the exact chart version to install. If this is not specified, the latest version is installed|
+jenkins_version|string|null|Specify the exact chart version to install. If this is not specified, the latest version is installed|
 workspace|string|services-host-dev|a terraform workspace name that host the target environment|
 kube_config_context|string|null|a kubectl context to set|
