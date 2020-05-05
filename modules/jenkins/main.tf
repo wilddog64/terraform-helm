@@ -43,7 +43,8 @@ data "terraform_remote_state" "bde-vpc" {
 data "template_file" "custom_helm_values" {
   template = "${file("${path.module}/files/values.yaml")}"
   vars = {
-    jenkins_hostname = "${var.jenkins_hostname}"
+    # jenkins_hostname = trimsuffix(google_dns_record_set.jenkins.name, ".")
+    jenkins_hostname = "jenkins.cluster.local"
   }
 }
 
@@ -58,18 +59,20 @@ resource "google_compute_address" "static" {
   region  = data.terraform_remote_state.bde-project.outputs.region
   name    = random_id.id.hex
 
-  subnetwork = data.bde-vpc.vpc_private_subnet_self_link
+  address_type = "INTERNAL"
+  subnetwork = data.terraform_remote_state.bde-vpc.outputs.vpc_private_subnet_self_link
   address = var.ip_address
 }
 
 resource "google_dns_record_set" "jenkins" {
-  name = "jenkins.${data.bde-dns.dns_name}"
+  project = data.terraform_remote_state.bde-project.outputs.project_id[0]
+  name = "jenkins.${data.terraform_remote_state.bde-dns.outputs.dns_name}"
   type = "A"
   ttl  = 300
 
-  managed_zone = data.terraform_remote_state.bde-dns.managed_zone_name
+  managed_zone = data.terraform_remote_state.bde-dns.outputs.managed_zone_name
   rrdatas = [
-    google_compute_adddress.static.address
+    google_compute_address.static.address
   ]
 }
 
@@ -84,6 +87,7 @@ module "jenkins" {
   cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluster_ca_certificate
   helm_repo_url = "https://charts.cloudbees.com/public/cloudbees"
   helm_repo = "cloudbees"
+  skip_crds = var.skip_crds
 
   helm_chart      = var.helm_chart
   jenkins_version = var.jenkins_version

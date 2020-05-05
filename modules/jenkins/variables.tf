@@ -126,3 +126,9 @@ variable "ip_address" {
   type        = string
   default     = "10.0.42.42"
 }
+
+variable "skip_crds" {
+  description = "(Optional) If set, no CRDs will be installed. By default, CRDs are installed if not already present. Defaults to false"
+  type = bool
+  default = false
+}
