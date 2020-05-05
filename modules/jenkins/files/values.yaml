@@ -11,7 +11,7 @@ master:
     - google-source-plugin:latest
     - google-kubernetes-engine:latest
     - google-storage-plugin:latest
-#   - job-dsl-plugin:latest
+    - job-dsl-plugin:latest
   resources:
     requests:
       cpu: "50m"
