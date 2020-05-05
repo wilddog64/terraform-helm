@@ -34,16 +34,16 @@ To destroy a Jenkins instance, add a `-destroy` flag to `terraform plan`
 automic|type|bool|false|f set, installation process purges chart on fail. The wait flag will be set automatically if atomic is used. Defaults to false|
 cleanup_on_fail|bool|false|Allow deletion of new resources created in this upgrade when upgrade fails. Defaults to false|
 helm_chart|string|cloudbee-core|a helm chart this module try to install|
+helm_repo_url|string|null|a helm repo url|
+helm_repo|string|null|a helm repo|
+ip_address|string|null|an ip address to create, the address has to a valid ip for a given vpc subnet range|
 jenkins_version|string|null|Specify the exact chart version to install. If this is not specified, the latest version is installed|
+kube_config_context|string|null|a kubectl context to set|
 kube_config_context|string|null|a kubectl context to set|
 namespace|string|bde-jenkins|a kubernetes namespace this chart will install to|
 reset_values|bool|false|When upgrading, reset the values to the ones built into the chart. Defaults to false|
 reuse_values|bool|false|When upgrading, reuse the last release's values and merge in any overrides. If 'reset_values' is specified, this is ignored. Defaults to false|
+skip_crds|bool|false|(Optional) If set, no CRDs will be installed. By default, CRDs are installed if not already present. Defaults to false|
 timeout|number|300|timeout value for chart installation, default 500s|
 values|list|null|a list of custom chart value.yaml files|
 workspace|string|services-host-dev|a terraform workspace name that host the target environment|
-kube_config_context|string|null|a kubectl context to set|
-ip_address|string|null|an ip address to create, the address has to a valid ip for a given vpc subnet range|
-skip_crds|bool|false|(Optional) If set, no CRDs will be installed. By default, CRDs are installed if not already present. Defaults to false|
-helm_repo_url|string|null|a helm repo url|
-helm_repo|string|null|a helm repo|
