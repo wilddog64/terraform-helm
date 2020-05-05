@@ -30,6 +30,15 @@ _note_: in order to access output values from other projects, they have to be de
     # then apply the plan
     terraform apply /tmp/k8s-jenkins.plan
 
+_Note:_ The above terraform command assumes the following
+
+* a remote bucket `services-host-dev` exists
+* a `gke_services-host-dev-5babb4e8_us-west2_bde` kubectl context exists
+
+you can obtain kubernetes current context by running this command,
+
+    kubectl config current-context
+
 ## Variables
 
 |Name|Type|Default|Description|
