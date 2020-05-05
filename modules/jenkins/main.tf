@@ -85,8 +85,8 @@ module "jenkins" {
 
   kube_config_context = var.kube_config_context
   cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluster_ca_certificate
-  helm_repo_url = "https://charts.cloudbees.com/public/cloudbees"
-  helm_repo = "cloudbees"
+  helm_repo_url = "https://kubernetes-charts.storage.googleapis.com"
+  helm_repo = "stable"
   skip_crds = var.skip_crds
 
   helm_chart      = var.helm_chart
@@ -96,7 +96,8 @@ module "jenkins" {
   release_name = "bde"
   namespace = "bde-jenkins"
   values = [
-    "${data.template_file.custom_helm_values.rendered}"
+    # "${data.template_file.custom_helm_values.rendered}"
+    "${file("${path.module}/files/values.yaml")}"
   ]
 
   depends = [
