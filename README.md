@@ -13,19 +13,21 @@ In order to deploy a `helm chart`, one have to find the following information
 
 In order to find a proper chart to deploy, first we have to query https://hub.helm.sh to find out the information for a give `chart` repo. Rning this oneliner can help,
 
-    curl -s https://hub.helm.sh/api/chartsvc/v1/charts/search\?q=cloudbees | jq -r '.[][].attributes | { chart: .name, repo_name: .repo.name , repo_url: .repo.url }'
+    curl -s https://hub.helm.sh/api/chartsvc/v1/charts/search\?q=jenkins | jq -r '.[][].attributes | { chart: .name, repo_name: .repo.name , repo_url: .repo.url }'
 
 And you will get this output
 
     {
-      "chart": "cloudbees-core",
-      "repo_name": "cloudbees",
-      "repo_url": "https://charts.cloudbees.com/public/cloudbees"
+      "chart": "jenkins",
+      "repo_name": "stable"
     }
     {
-      "chart": "cloudbees-flow",
-      "repo_name": "cloudbees",
-      "repo_url": "https://charts.cloudbees.com/public/cloudbees"
+      "chart": "jenkins",
+      "repo_name": "codecentric"
+    }
+    {
+      "chart": "jenkins",
+      "repo_name": "bitnami"
     }
     ...
 
