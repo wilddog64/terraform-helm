@@ -37,7 +37,6 @@ data "template_file" "custom_helm_values" {
   }
 }
 
-
 module "jenkins" {
   source = "../.."
   credential_file = file("~/.config/gcloud/tf-svc-acct.json")
