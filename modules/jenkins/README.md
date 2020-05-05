@@ -22,6 +22,7 @@ _note_: in order to access output values from other projects, they have to be de
     # then apply the plan
     terraform apply /tmp/k8s-jenkins.plan
 
+### To connect to GKE Jenkins Instance
 ### To destroy a Jenkins instance, add a `-destroy` flag to `terraform plan`
 
     # first generate a terraform plan
