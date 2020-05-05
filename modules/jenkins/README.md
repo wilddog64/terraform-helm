@@ -23,6 +23,38 @@ _note_: in order to access output values from other projects, they have to be de
     terraform apply /tmp/k8s-jenkins.plan
 
 ### To connect to GKE Jenkins Instance
+
+#### Identify the right namespace by running
+
+    kubectl get namespace
+
+This command will list available namespaces for a given GKE cluster, the output looks like this (it may be different depending on which GKE cluster you are running against to)
+
+    NAME              STATUS   AGE
+    bde-jenkins       Active   13h
+    default           Active   17h
+    kube-node-lease   Active   17h
+    kube-public       Active   17h
+    kube-system       Active   17h
+
+The namespace we are looking for is `bde-jenkins`
+
+#### Retrieve password from Kubernetes secrets
+
+Before you can login you need to retrieve `admin` password from kubernetes secret. The following command can do that for you
+
+    printf (kubectl get secret --namespace bde-jenkins bde-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+
+### Port forwarding
+
+To test if you can access to a provisoned Jenkins instance, executing the following shell script command to forward remote port 8080 to local,
+
+    ./jenkins-port-forwarding.sh
+
+### Login
+
+Navigate to http://localhost:8080, and enter `admin/<password>` to login to a Jenkins instance`.
+
 ### To destroy a Jenkins instance, add a `-destroy` flag to `terraform plan`
 
     # first generate a terraform plan
