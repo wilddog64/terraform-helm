@@ -7,4 +7,3 @@ services-host.json
 billing_account.txt
 crash.log
 *.json
-jenkins-port-forarding.sh

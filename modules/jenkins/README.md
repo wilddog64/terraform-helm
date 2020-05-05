@@ -3,7 +3,10 @@
 Jenkins module inherits from `terraform-gcp-helm` in order to deploy jenkins to kubernestes cluster. This module uses `terraform_remote_state` to query information from a target environment. The module will also create a `external static ip` in order to bind it to Jenkins instance. The following information are queried from remote project,
 
 * project_id - target project 
+* region - target project region
 * zone - target project zone
+* dns_name - a CloudDNS manged zone dns name
+* vpc_private_subnet_self_link - a vpc private subnet link
 * cluster_endpoint - target k8s cluster that Jenkins will deploy to
 * cluster_ca_certificate - target k8s ca certificate for authentication
 
