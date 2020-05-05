@@ -42,6 +42,7 @@ resource "helm_release" "default" {
 
   // a namespace this chart will install to
   namespace = var.namespace
+  skip_crds = var.skip_crds
 
   // load custom
   values = var.values
