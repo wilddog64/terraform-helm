@@ -31,10 +31,10 @@ data "terraform_remote_state" "bde-vpc" {
 
 data "template_file" "custom_helm_values" {
   template = "${file("${path.module}/files/values.yaml")}"
-  vars = {
-    # jenkins_hostname = trimsuffix(google_dns_record_set.jenkins.name, ".")
-    jenkins_hostname = "jenkins.cluster.local"
-  }
+  // vars = {
+  //   # jenkins_hostname = trimsuffix(google_dns_record_set.jenkins.name, ".")
+  //   jenkins_hostname = "jenkins.cluster.local"
+  // }
 }
 
 module "jenkins" {
