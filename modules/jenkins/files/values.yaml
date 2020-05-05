@@ -11,7 +11,7 @@ master:
     - google-source-plugin:latest
     - google-kubernetes-engine:latest
     - google-storage-plugin:latest
-    - job-dsl-plugin:latest
+    - job-dsl:latest
   resources:
     requests:
       cpu: "50m"
@@ -33,3 +33,12 @@ persistence:
   size: 100Gi
 serviceAccount:
   name: cd-jenkins
+
+# OperationsCenter:
+#     HostName: "${jenkins_hostname}"
+#     Ingress:
+#       tls:
+#       ## Set this to true in order to enable TLS on the ingress record
+#         Enable: false
+#         SecretName: core-example-com-tls
+#         Host: jenkins.cluster.local

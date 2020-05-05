@@ -19,17 +19,24 @@ data "terraform_remote_state" "bde-gke" {
   }
 }
 
-resource "random_id" "id" {
-  byte_length = 4
-  prefix      = "jenkins-static-ip-"
+data "terraform_remote_state" "bde-vpc" {
+  backend = "gcs"
+  workspace = var.workspace
+  config = {
+    bucket      = "bde-tf-state-dev"
+    prefix      = "terraform/state"
+    credentials = file("~/.config/gcloud/tf-svc-acct.json")
+  }
 }
 
-// provision a static ip here
-resource "google_compute_address" "static" {
-  project = data.terraform_remote_state.bde-project.outputs.project_id[0]
-  region  = data.terraform_remote_state.bde-project.outputs.region
-  name    = random_id.id.hex
+data "template_file" "custom_helm_values" {
+  template = "${file("${path.module}/files/values.yaml")}"
+  vars = {
+    # jenkins_hostname = trimsuffix(google_dns_record_set.jenkins.name, ".")
+    jenkins_hostname = "jenkins.cluster.local"
+  }
 }
+
 
 module "jenkins" {
   source = "../.."
@@ -40,8 +47,9 @@ module "jenkins" {
 
   kube_config_context = var.kube_config_context
   cluster_ca_certificate = data.terraform_remote_state.bde-gke.outputs.cluster_ca_certificate
-  helm_repo_url = "https://charts.cloudbees.com/public/cloudbees"
-  helm_repo = "cloudbees"
+  helm_repo_url = "https://kubernetes-charts.storage.googleapis.com"
+  helm_repo = "stable"
+  skip_crds = var.skip_crds
 
   helm_chart      = var.helm_chart
   jenkins_version = var.jenkins_version
@@ -50,6 +58,11 @@ module "jenkins" {
   release_name = "bde"
   namespace = "bde-jenkins"
   values = [
+    # "${data.template_file.custom_helm_values.rendered}"
     "${file("${path.module}/files/values.yaml")}"
+  ]
+
+  depends = [
+    google_compute_address.static
   ]
 }

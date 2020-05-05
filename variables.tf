@@ -144,3 +144,15 @@ variable "kube_config_context" {
   type = string
   default = null
 }
+
+variable "depends" {
+  description = "resources this module depends on"
+  type        = any
+  default     = null
+}
+
+variable "skip_crds" {
+  description = "(Optional) If set, no CRDs will be installed. By default, CRDs are installed if not already present. Defaults to false"
+  type        = bool
+  default     = false
+}

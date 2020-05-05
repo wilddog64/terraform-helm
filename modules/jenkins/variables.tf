@@ -106,7 +106,7 @@ variable "set_string" {
 variable "jenkins_version" {
   description = "Specify the exact chart version to install. If this is not specified, the latest version is installed"
   type        = string
-  default     = "3.13.0+899a413a0e8f"
+  default     = null
 }
 
 variable "workspace" {
@@ -119,4 +119,28 @@ variable "kube_config_context" {
   description = "a kubectl context to set"
   type = string
   default = null
+}
+
+variable "ip_address" {
+  description = "an ip address to create"
+  type        = string
+  default     = "10.0.42.42"
+}
+
+variable "skip_crds" {
+  description = "(Optional) If set, no CRDs will be installed. By default, CRDs are installed if not already present. Defaults to false"
+  type = bool
+  default = false
+}
+
+variable "helm_repo_url" {
+  description = "a helm repo url"
+  type        = string
+  default     = null
+}
+
+variable "helm_repo" {
+  description = "a helm repo"
+  type       = string
+  default     = null
 }
