@@ -42,3 +42,8 @@ reuse_values|bool|false|When upgrading, reuse the last release's values and merg
 timeout|number|300|timeout value for chart installation, default 500s|
 values|list|null|a list of custom chart value.yaml files|
 workspace|string|services-host-dev|a terraform workspace name that host the target environment|
+kube_config_context|string|null|a kubectl context to set|
+ip_address|string|null|an ip address to create, the address has to a valid ip for a given vpc subnet range|
+skip_crds|bool|false|(Optional) If set, no CRDs will be installed. By default, CRDs are installed if not already present. Defaults to false|
+helm_repo_url|string|null|a helm repo url|
+helm_repo|string|null|a helm repo|
