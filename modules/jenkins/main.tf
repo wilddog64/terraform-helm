@@ -40,8 +40,8 @@ data "template_file" "custom_helm_values" {
 module "jenkins" {
   source = "../.."
   credential_file = file("~/.config/gcloud/tf-svc-acct.json")
-  region = data.terraform_remote_state.bde-project.outputs.region
-  zone = data.terraform_remote_state.bde-project.outputs.zone
+  region = data.terraform_remote_state.bde-gke.outputs.region
+  zone = data.terraform_remote_state.bde-gke.outputs.zone
   gke_host_endpoint = data.terraform_remote_state.bde-gke.outputs.cluster_endpoint
 
   kube_config_context = var.kube_config_context
@@ -61,7 +61,7 @@ module "jenkins" {
     "${file("${path.module}/files/values.yaml")}"
   ]
 
-  depends = [
-    google_compute_address.static
-  ]
+//   depends = [
+//     google_compute_address.static
+//   ]
 }
