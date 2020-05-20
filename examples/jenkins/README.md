@@ -1,4 +1,4 @@
-# terraform-gcp-helm//modules/jenkins
+# terraform-gcp-helm/examples/jenkins
 
 Jenkins module inherits from `terraform-gcp-helm` in order to deploy jenkins to kubernestes cluster. This module uses `terraform_remote_state` to query information from a target environment. The module will also create a `external static ip` in order to bind it to Jenkins instance. The following information are queried from remote project,
 
