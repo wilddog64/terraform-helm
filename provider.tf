@@ -24,3 +24,8 @@ provider "random" {
 provider "template" {
   version = "~> 2.1"
 }
+
+provider "helm" {
+  version = "~> 1.1.1"
+}
+

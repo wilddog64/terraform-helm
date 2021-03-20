@@ -16,10 +16,6 @@ provider "kubernetes" {
   token = data.google_client_config.current.access_token
 }
 
-provider "helm" {
-  version = "~> 1.1.1"
-}
-
 data "helm_repository" "default" {
   name = var.helm_repo
   url  = var.helm_repo_url
