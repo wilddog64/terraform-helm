@@ -24,8 +24,8 @@ variable "gke_host_endpoint" {
 
 variable "gke_cluster_ca_certificate" {
   description = "PEM-encoded root certificates bundle for TLS authentication. Can be sourced from"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "helm_chart" {
@@ -42,14 +42,14 @@ variable "namespace" {
 
 variable "values" {
   description = "a list of custom chart value.yaml files"
-  type        = list
+  type        = list(any)
   default     = null
 }
 
 variable "timeout" {
   description = "timeout value for chart installation, default 500s"
-  type = number
-  default = 300
+  type        = number
+  default     = 300
 }
 
 variable "reuse_values" {
@@ -79,7 +79,7 @@ variable "automic" {
 variable "set_values" {
   description = "Value block with custom values to be merged with the values yaml"
   type = list(object({
-    name = string
+    name  = string
     value = any
   }))
   default = null
@@ -88,7 +88,7 @@ variable "set_values" {
 variable "set_sensitive" {
   description = "Value block with custom sensitive values to be merged with the values yaml that won't be exposed in the plan's diff"
   type = list(object({
-    name = string
+    name  = string
     value = any
   }))
   default = null
@@ -97,7 +97,7 @@ variable "set_sensitive" {
 variable "set_string" {
   description = "Value block with custom STRING values to be merged with the values yaml"
   type = list(object({
-    name = string
+    name  = string
     value = any
   }))
   default = null
@@ -105,14 +105,14 @@ variable "set_string" {
 
 variable "cluster_ca_certificate" {
   description = "a k8s cluster ca cert"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "atomic" {
   description = "perform a helm atomic operation"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "jenkins_version" {
@@ -141,8 +141,8 @@ variable "helm_repo" {
 
 variable "kube_config_context" {
   description = "kubectl config context"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "depends" {

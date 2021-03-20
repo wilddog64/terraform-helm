@@ -7,7 +7,7 @@ data "google_client_config" "current" {}
 
 provider "kubernetes" {
   load_config_file = false
-  host = var.gke_host_endpoint
+  host             = var.gke_host_endpoint
 
   config_context = var.kube_config_context
   cluster_ca_certificate = base64decode(
@@ -53,7 +53,7 @@ resource "helm_release" "default" {
   reset_values = var.reset_values
 
   cleanup_on_fail = var.cleanup_on_fail
-  atomic = var.atomic
+  atomic          = var.atomic
 
   // generate a set block if var.sets is not null
   dynamic "set" {
@@ -76,7 +76,7 @@ resource "helm_release" "default" {
   }
 
   // generate a set_string dynamiclly if var.set_string is not null
-  dynamic  "set_string" {
+  dynamic "set_string" {
     for_each = var.set_string == null ? [] : var.set_string
 
     content {
