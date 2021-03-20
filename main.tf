@@ -6,7 +6,6 @@ data "google_client_config" "current" {}
 //
 
 provider "kubernetes" {
-  version = "~> 1.11"
   load_config_file = false
   host = var.gke_host_endpoint
 
